@@ -12,9 +12,8 @@ header {
   text-align: center;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
-
 nav a {
-  color: #2e3d33;
+  color: #2f3e34; 
   text-decoration: none;
   margin: 0 15px;
   font-weight: bold;
@@ -22,7 +21,12 @@ nav a {
 }
 
 nav a:hover {
-  color: #5a7c61; 
+  color: #5f7b6b;
+  text-decoration: underline; 
+}
+
+nav a:visited {
+  color: #8ba89a;
 }
 
 main {
@@ -72,7 +76,29 @@ tr:hover td {
 .merged-row:hover + .merged-row {
   background-color: #dce6dc;
 }
+.float-section {
+  width: 70%;
+  margin: 40px auto;
+  background-color: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  overflow: hidden; 
+}
 
+.float-img {
+  float: left; 
+  width: 100px;
+  height: 100px;
+  margin-right: 20px;
+  border-radius: 10px;
+  border: 2px solid #bcd0c7; 
+}
+
+.float-section p {
+  text-align: justify;
+  color: #2f3e34;
+}
 .image-section {
   margin-top: 40px;
 }
