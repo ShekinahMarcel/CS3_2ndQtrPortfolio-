@@ -1,0 +1,15 @@
+<body>
+  <h2>Press any key</h2>
+  <p id="keyDisplay">Refresh page to reset</p>
+
+  <script>
+    document.body.onkeypress = changeColorPress;
+
+    function changeColorPress(event) {
+      document.body.style.backgroundColor = "royalblue";
+
+      const display = document.getElementById("keyDisplay");
+      display.textContent = `You pressed: "${event.key}"`;
+    }
+  </script>
+</body>
