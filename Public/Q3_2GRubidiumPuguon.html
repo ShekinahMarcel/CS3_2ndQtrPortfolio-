@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Club Application Form</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+        background-image: url('https://i.pinimg.com/736x/5d/81/08/5d8108bcb06f7d1af4614b62cc651c2a.jpg');
+    }
+    
+    form {
+        width: 500px;
+        margin: 30px auto;
+        padding: 20px;
+        background-color: white;
+        border-radius: 10px;
+        background-image: url('https://i.pinimg.com/736x/48/02/19/480219046757dd01bbe21d9f8bb4d166.jpg');
+    }
+    
+    fieldset {
+        margin-bottom: 15px;
+        padding: 15px;
+    }
+    
+    label {
+        display: block;
+        margin-bottom: 10px;
+    }
+    
+    input, select, textarea {
+        width: 100%;
+        padding: 6px;
+    }
+    
+    input:focus, select:focus, textarea:focus {
+        background-color: #e6f2ff;
+        border: 2px solid #3399ff;
+    }
+    
+    .invalid {
+        border: 2px solid red;
+        background-color: #ffe6e6;
+    }
+    
+    button {
+        padding: 8px 15px;
+        margin-right: 10px;
+    }
+    </style>
+    
+    <script>
+    function pageLoad() {
+        alert("Welcome to the Club Application Form!!!! sir i didnt know vs code can suggest codes");
+    }
+    function confirmSubmit() {
+        return confirm("Do you want to submit this application?");
+    }
+    
+    function confirmReset() {
+        return confirm("Do you want to reset the form?");
+    }
+    
+    function checkEmpty(el) {
+        if (el.value.trim() === "") {
+            el.classList.add("invalid");
+        } else {
+            el.classList.remove("invalid");
+        }
+    }
+    function clickNotice() {
+        alert("sure ka ha.. sinubmit mo na. bala ka diyan.");
+    }
+    </script>
+    </head>
+
+<body onload="pageLoad()">
+
+<form method="post" action="submit" onsubmit="return confirmSubmit()" onreset="return confirmReset()">
+
+<fieldset>
+<legend>Personal Information</legend>
+
+<label>
+Student ID
+<input type="number" required onblur="checkEmpty(this)">
+</label>
+
+<label>
+Full Name
+<input type="text" required onblur="checkEmpty(this)">
+</label>
+
+<label>
+Birthday
+<input type="date" required>
+</label>
+
+<label>
+Email Address
+<input type="email" required onblur="checkEmpty(this)">
+</label>
+</fieldset>
+
+<fieldset>
+<legend>Application Details</legend>
+
+<label>
+Mobile Phone
+<input type="text" required onblur="checkEmpty(this)">
+</label>
+
+<label>
+Grade Level
+<select required>
+<option value="">Select</option>
+<option value="g7">Grade 7</option>
+<option value="g8">Grade 8</option>
+<option value="g9">Grade 9</option>
+<option value="g10">Grade 10</option>
+<option value="g11">Grade 11</option>
+<option value="g12">Grade 12</option>
+</select>
+</label>
+
+<label>
+Intern / Extern
+<input type="radio" name="status" value="i" required> Intern
+<input type="radio" name="status" value="e"> Extern
+</label>
+
+<label>
+Preferred Organization / Club
+<select required>
+<option value="">Select</option>
+<option value="sc">Invictus</option>
+<option value="ec">Ellipsis</option>
+<option value="mc">Math Club</option>
+<option value="ac">Likha</option>
+<option value="tc">Sagala</option>
+</select>
+</label>
+
+<label>
+Why do you want to join
+<textarea rows="4" required onblur="checkEmpty(this)"></textarea>
+</label>
+</fieldset>
+
+<button type="submit" onclick="clickNotice()">Submit</button>
+<button type="reset" onclick="clickNotice()">Reset</button>
+
+</form>
+
+</body>
+</html>
