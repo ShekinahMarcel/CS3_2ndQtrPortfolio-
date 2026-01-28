@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>View Sign-ups</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #eef1f4;
+      padding: 30px;
+    }
+
+    h2, h4 {
+      text-align: center;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      margin-top: 20px;
+    }
+
+    th, td {
+      border: 1px solid #000;
+      padding: 8px;
+      text-align: center;
+    }
+
+    select {
+      padding: 6px;
+      margin-top: 10px;
+    }
+
+    .back {
+      margin-top: 20px;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Show list of Students who’s signed up</h2>
+<h4>by Shekinah Marcel Puguon</h4>
+
+<label>Filter by Club:</label>
+<select id="filter" onchange="display()">
+  <option value="ALL">ALL</option>
+  <option value="">Select Electives</option>
+      <option value="Selected Topics in Life Science">Life Sciences</option>
+      <option value="Bioethics">Bioethics</option>
+      <option value="Biostat">Biostat</option>
+      <option value="Livestock Raising">Livestock Raising</option>
+      <option value="Advanced Chemistry">Advanced Chemistry</option>
+      <option value="Full Stack Web Development">Full Stack Web Development</option>
+      <option value="Artificial Intelligence and Immersive Technologies">Artificial Intelligence and Immersive Technologies</option>
+      <option value="Geology">Geology</option>
+</select>
+
+<p id="msg"></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Full Name</th>
+      <th>Grade</th>
+      <th>Club</th>
+      <th>Email</th>
+      <th>Mobile</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody id="tableBody"></tbody>
+</table>
+
+<p><strong>Total Sign-ups:</strong> <span id="total">0</span></p>
+
+<a href="index.html" class="back">← Back to Sign-Up Page</a>
+
+<script>
+function display() {
+  const data = JSON.parse(localStorage.getItem("clubSignups"));
+  const filter = document.getElementById("filter").value;
+  const tbody = document.getElementById("tableBody");
+  const msg = document.getElementById("msg");
+
+  tbody.innerHTML = "";
+  msg.textContent = "";
+
+  if (!data || data.length === 0) {
+    msg.textContent = "No sign-ups saved.";
+    total.textContent = 0;
+    return;
+  }
+
+  let list = filter === "ALL" ? data : data.filter(s => s.club === filter);
+
+  if (list.length === 0) {
+    msg.textContent = "No sign-ups for this club.";
+    total.textContent = 0;
+    return;
+  }
+
+  list.forEach(s => {
+    tbody.innerHTML += `
+      <tr>
+        <td>${s.fullname}</td>
+        <td>${s.grade}</td>
+        <td>${s.club}</td>
+        <td>${s.email}</td>
+        <td>${s.mobile}</td>
+        <td>${s.status}</td>
+      </tr>
+    `;
+  });
+
+  total.textContent = list.length;
+}
+
+display();
+</script>
+
+</body>
+</html>
