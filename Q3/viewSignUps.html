@@ -8,6 +8,7 @@
       font-family: Arial;
       background: #eef1f4;
       padding: 30px;
+      background-image: url('https://i.pinimg.com/736x/92/9b/6f/929b6f264aad482514f6c1a8f4b2597a.jpg');
     }
 
     h2, h4 {
@@ -19,6 +20,7 @@
       border-collapse: collapse;
       background: white;
       margin-top: 20px;
+      background-image: url("https://i.pinimg.com/736x/39/e6/08/39e60801483addf7d5ca2914f01feadf.jpg");
     }
 
     th, td {
@@ -43,7 +45,7 @@
 <h2>Show list of Students who’s signed up</h2>
 <h4>by Shekinah Marcel Puguon</h4>
 
-<label>Filter by Club:</label>
+<label>Filter by Electives:</label>
 <select id="filter" onchange="display()">
   <option value="ALL">ALL</option>
   <option value="">Select Electives</option>
@@ -64,7 +66,7 @@
     <tr>
       <th>Full Name</th>
       <th>Grade</th>
-      <th>Club</th>
+      <th>Elective</th>
       <th>Email</th>
       <th>Mobile</th>
       <th>Status</th>
@@ -96,7 +98,7 @@ function display() {
   let list = filter === "ALL" ? data : data.filter(s => s.club === filter);
 
   if (list.length === 0) {
-    msg.textContent = "No sign-ups for this club.";
+    msg.textContent = "No sign-ups for this elective.";
     total.textContent = 0;
     return;
   }
