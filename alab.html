@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ALAB 2026 Masterdoc</title>
+
+<style>
+:root{
+  --red:#b11226;
+  --dark:#1a1a1a;
+  --light:#f9f9f9;
+  --gray:#e5e5e5;
+}
+
+body{
+  margin:0;
+  font-family: Arial, sans-serif;
+  background:var(--light);
+  color:#222;
+}
+
+header{
+  background:var(--red);
+  color:white;
+  padding:20px;
+  text-align:center;
+}
+
+nav{
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  background:#8d0f1f;
+  padding:10px;
+}
+
+nav button{
+  background:white;
+  border:none;
+  padding:8px 14px;
+  cursor:pointer;
+  font-weight:bold;
+  border-radius:4px;
+}
+
+nav button:hover{
+  background:var(--gray);
+}
+
+section{
+  display:none;
+  padding:20px;
+}
+
+section.active{
+  display:block;
+}
+
+h2{
+  color:var(--red);
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:10px;
+}
+
+th, td{
+  border:1px solid var(--gray);
+  padding:6px;
+  text-align:left;
+}
+
+th{
+  background:var(--red);
+  color:white;
+}
+
+input, select{
+  width:100%;
+  padding:4px;
+  border:1px solid var(--gray);
+}
+
+.add-btn{
+  margin-top:10px;
+  padding:6px 12px;
+  background:var(--red);
+  color:white;
+  border:none;
+  cursor:pointer;
+}
+
+.add-btn:hover{
+  opacity:0.85;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>ALAB 2026 Masterdoc</h1>
+  <p>Batch 2029 | Central Operations & Trackers</p>
+</header>
+
+<nav>
+  <button onclick="show('master')">Masterdoc</button>
+  <button onclick="show('finance')">Finance</button>
+  <button onclick="show('programs')">Programs</button>
+  <button onclick="show('creatives')">Creatives</button>
+  <button onclick="show('logistics')">Logistics</button>
+</nav>
+
+<!-- MASTERDOC -->
+<section id="master" class="active">
+  <h2>Master Task Tracker</h2>
+  <table id="masterTable">
+    <tr><th>Task</th><th>Committee</th><th>Lead</th><th>Deadline</th><th>Status</th></tr>
+  </table>
+  <button class="add-btn" onclick="addRow('masterTable')">+ Add Task</button>
+</section>
+
+<!-- FINANCE -->
+<section id="finance">
+  <h2>Finance & Expenses Tracker</h2>
+  <table id="financeTable">
+    <tr><th>Description</th><th>Type</th><th>Amount</th><th>Date</th><th>Remarks</th></tr>
+  </table>
+  <button class="add-btn" onclick="addRow('financeTable')">+ Add Entry</button>
+</section>
+
+<!-- PROGRAMS -->
+<section id="programs">
+  <h2>ALAB Schedule & Program Flow</h2>
+  <table id="programsTable">
+    <tr><th>Activity</th><th>Date</th><th>Time</th><th>Venue</th><th>Committee</th></tr>
+  </table>
+  <button class="add-btn" onclick="addRow('programsTable')">+ Add Activity</button>
+</section>
+
+<!-- CREATIVES -->
+<section id="creatives">
+  <h2>Creatives Tracker (Pubmat / Merch / SocMed)</h2>
+  <table id="creativesTable">
+    <tr><th>Item</th><th>Type</th><th>Assigned To</th><th>Deadline</th><th>Status</th></tr>
+  </table>
+  <button class="add-btn" onclick="addRow('creativesTable')">+ Add Item</button>
+</section>
+
+<!-- LOGISTICS -->
+<section id="logistics">
+  <h2>Logistics & Loot Bag Tracker</h2>
+  <table id="logisticsTable">
+    <tr><th>Material / Task</th><th>Quantity</th><th>Area</th><th>Person-in-Charge</th><th>Status</th></tr>
+  </table>
+  <button class="add-btn" onclick="addRow('logisticsTable')">+ Add Entry</button>
+</section>
+
+<script>
+const tables = [
+  "masterTable",
+  "financeTable",
+  "programsTable",
+  "creativesTable",
+  "logisticsTable"
+];
+
+function show(id){
+  document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+}
+
+function addRow(tableId){
+  const table = document.getElementById(tableId);
+  const row = table.insertRow();
+  for(let i=0;i<table.rows[0].cells.length;i++){
+    const cell = row.insertCell();
+    cell.innerHTML = `<input oninput="saveData()">`;
+  }
+  saveData();
+}
+
+function saveData(){
+  const data = {};
+  tables.forEach(id=>{
+    const rows = [...document.getElementById(id).rows].slice(1);
+    data[id] = rows.map(r=>[...r.cells].map(c=>c.firstChild.value));
+  });
+  localStorage.setItem("ALAB2026_DATA", JSON.stringify(data));
+}
+
+function loadData(){
+  const saved = JSON.parse(localStorage.getItem("ALAB2026_DATA"));
+  if(!saved) return;
+
+  tables.forEach(id=>{
+    saved[id].forEach(rowData=>{
+      const row = document.getElementById(id).insertRow();
+      rowData.forEach(val=>{
+        const cell = row.insertCell();
+        cell.innerHTML = `<input value="${val}" oninput="saveData()">`;
+      });
+    });
+  });
+}
+
+loadData();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Movie List Kineme</title>
+
+<style>
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background:#f2f2f2;
+    background-image: url("https://i.pinimg.com/1200x/93/31/9d/93319d1600bd69fcb7db28fef7b4a7bb.jpg");
+}
+
+.box{
+    width:500px;
+    margin:40px auto;
+    padding:20px;
+    border-radius:8px;
+    background:white;
+}
+
+input, select{
+    width:100%;
+    padding:6px;
+    margin-top:5px;
+    margin-bottom:12px;
+}
+
+button{
+    width:100%;
+    padding:8px;
+    background:#2d79ff;
+    border:none;
+    color:white;
+    border-radius:4px;
+}
+
+.star{
+    font-size:22px;
+    cursor:pointer;
+    color:lightgray;
+}
+
+.starcolor{
+    color:rgb(185, 158, 4);
+}
+
+.movieItem{
+    background:#efefef;
+    padding:8px;
+    margin-top:8px;
+    border-radius:5px;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="box">
+
+<h2>Add a Movie~!</h2>
+
+<label>Title:</label>
+<input id="movieTitle">
+
+<label>Year:</label>
+<input id="movieYear">
+
+<label>Genre:</label>
+<select id="movieGenre">
+<option>Action</option>
+<option>Comedy</option>
+<option>Drama</option>
+<option>Sci-Fi</option>
+<option>Fantasy</option>
+<option>Romance</option>
+<option>Horror</option>
+<option>Thriller</option>
+</select>
+
+<label>Rating:</label>
+<div id="starPlace">
+<span class="star" data-num="1">★</span>
+<span class="star" data-num="2">★</span>
+<span class="star" data-num="3">★</span>
+<span class="star" data-num="4">★</span>
+<span class="star" data-num="5">★</span>
+</div>
+
+<br>
+<button onclick="addMovieThing()">Add Movie</button>
+
+<h3>Movie List</h3>
+
+<div id="movieList"></div>
+</div>
+
+<script>
+
+let chosenRating = 0;
+let stars = document.querySelectorAll(".star");
+
+stars.forEach(function(e){
+    e.addEventListener("click", function(){
+
+        chosenRating = this.dataset.num;
+
+        stars.forEach(function(a){
+            a.classList.remove("starcolor");
+        });
+
+        for(let e = 0; e < chosenRating; e++){
+            stars[e].classList.add("starcolor");
+        }
+
+    });
+});
+
+
+function addMovieThing(){
+
+let title = document.getElementById("movieTitle").value;
+let year = document.getElementById("movieYear").value;
+let genre = document.getElementById("movieGenre").value;
+
+    if(title == "" || year == "" || chosenRating == 0){
+        alert("pls fill everything");
+        return;
+    }
+
+    let newMovie = {
+        title: title,
+        year: year,
+        genre: genre,
+        rating: chosenRating
+    };
+
+    let movieStuff = localStorage.getItem("movies");
+
+    if(movieStuff == null){
+        movieStuff = [];
+    }else{
+        movieStuff = JSON.parse(movieStuff);
+    }
+
+    movieStuff.push(newMovie);
+
+    localStorage.setItem("movies", JSON.stringify(movieStuff));
+
+    showMovies();
+
+}
+
+
+function showMovies(){
+
+    let spot = document.getElementById("movieList");
+
+    let movieStuff = localStorage.getItem("movies");
+
+    if(movieStuff == null){
+        return;
+    }
+
+    movieStuff = JSON.parse(movieStuff);
+
+    spot.innerHTML = "";
+
+    movieStuff.forEach(function(e){
+
+        let stars = "";
+
+        for(let e2 = 0; e2 < e.rating; e2++){
+            stars += "<span class='starcolor'>★</span>";
+        }
+
+        let thing = document.createElement("div");
+        thing.className = "movieItem";
+
+        thing.innerHTML =
+        e.title + " (" + e.year + ") - " +
+        e.genre + ", Rating: " + stars;
+
+        spot.appendChild(thing);
+
+    });
+
+}
+
+window.onload = function(){
+    showMovies();
+}
+
+</script>
+
+</body>
+</html>
