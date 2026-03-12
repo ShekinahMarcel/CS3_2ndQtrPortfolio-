@@ -9,7 +9,7 @@
 
 <div class="box">
 
-<h2>Add a Movie~!</h2>
+<h2>Add / Update a Movie~!</h2>
 
 <label>Title:</label>
 <input id="movieTitle">
@@ -74,10 +74,38 @@ let title = document.getElementById("movieTitle").value;
 let year = document.getElementById("movieYear").value;
 let genre = document.getElementById("movieGenre").value;
 
-    if(title == "" || year == "" || chosenRating == 0){
-        alert("pls fill everything");
-        return;
+if(title == "" || year == "" || chosenRating == 0){
+    alert("pls fill everything");
+    return;
+}
+
+let movieStuff = localStorage.getItem("movies");
+
+if(movieStuff == null){
+    movieStuff = [];
+}else{
+    movieStuff = JSON.parse(movieStuff);
+}
+
+let found = false;
+
+movieStuff.forEach(function(e){
+
+    if(e.title.toLowerCase() == title.toLowerCase()){
+
+        e.year = year;
+        e.genre = genre;
+
+        let newRate = (parseInt(e.rating) + parseInt(chosenRating)) / 2;
+        e.rating = Math.round(newRate);
+
+        found = true;
     }
+
+});
+
+
+if(!found){
 
     let newMovie = {
         title: title,
@@ -86,60 +114,80 @@ let genre = document.getElementById("movieGenre").value;
         rating: chosenRating
     };
 
-    let movieStuff = localStorage.getItem("movies");
-
-    if(movieStuff == null){
-        movieStuff = [];
-    }else{
-        movieStuff = JSON.parse(movieStuff);
-    }
-
     movieStuff.push(newMovie);
 
-    localStorage.setItem("movies", JSON.stringify(movieStuff));
+}
 
-    showMovies();
+localStorage.setItem("movies", JSON.stringify(movieStuff));
+
+showMovies();
 
 }
 
 
 function showMovies(){
 
-    let spot = document.getElementById("movieList");
+let spot = document.getElementById("movieList");
 
-    let movieStuff = localStorage.getItem("movies");
+let movieStuff = localStorage.getItem("movies");
 
-    if(movieStuff == null){
-        return;
-    }
+if(movieStuff == null){
+    return;
+}
 
-    movieStuff = JSON.parse(movieStuff);
+movieStuff = JSON.parse(movieStuff);
 
-    spot.innerHTML = "";
+spot.innerHTML = "";
 
-    movieStuff.forEach(function(e){
+movieStuff.forEach(function(e, index){
 
-        let stars = "";
+let stars = "";
 
-        for(let e2 = 0; e2 < e.rating; e2++){
-            stars += "<span class='starcolor'>★</span>";
-        }
+for(let e2 = 0; e2 < e.rating; e2++){
+    stars += "<span class='starcolor'>★</span>";
+}
 
-        let thing = document.createElement("div");
-        thing.className = "movieItem";
+let thing = document.createElement("div");
+thing.className = "movieItem";
 
-        thing.innerHTML =
-        e.title + " (" + e.year + ") - " +
-        e.genre + ", Rating: " + stars;
+thing.innerHTML =
+e.title + " (" + e.year + ") - " +
+e.genre + ", Rating: " + stars +
+" <button onclick='deleteMovie(" + index + ")'>Delete</button>";
 
-        spot.appendChild(thing);
+spot.appendChild(thing);
 
-    });
+});
 
 }
 
+function deleteMovie(e){
+
+let sure = confirm("are you sure you want to delete?");
+
+if(!sure){
+    return;
+}
+
+let movieStuff = localStorage.getItem("movies");
+
+if(movieStuff == null){
+    return;
+}
+
+movieStuff = JSON.parse(movieStuff);
+
+movieStuff.splice(e,1);
+
+localStorage.setItem("movies", JSON.stringify(movieStuff));
+
+showMovies();
+
+}
+
+
 window.onload = function(){
-    showMovies();
+showMovies();
 }
 
 </script>
