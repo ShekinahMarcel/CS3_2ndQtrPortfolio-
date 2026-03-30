@@ -94,7 +94,9 @@ Answer: Because z index is controls the stacking order of positioned elements. S
 
 - Challenge: 
     * What changes that you have to do on the code that will position .notice box on the top right corner of the .content box? Please write the code on paper as well (both html and css on the part of .notice and .content).
-    Answer: To move the position of the .notice box, I made changes in the values of px assigned to both the left and top properties. I increased left from 400px to 430 px and top from 60px to 70 px. 
+    Answer: To move the position of the .notice box, I made changes in the values of px assigned to both the left and top properties. I increased left from 400px to 430 px and top from 60px to 70 px.
+<img width="912" height="912" alt="image" src="https://github.com/user-attachments/assets/7175d5a2-2690-4092-aced-093d2ef21668" />
+
 
     * Try to change the position of .content to relative then to fixed. What do you observed each time?
     Answer: Changing the position of .content to relative moves the main content container downwards. While changing it to fixed brings it back up to its position similar to what it looked like in absolute. 
