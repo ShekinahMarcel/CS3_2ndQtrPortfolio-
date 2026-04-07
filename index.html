@@ -1,98 +1,150 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Shekinah Puguon's Portfolio</title>
-  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-  <style>
-    body {
-      font-family: "Segoe UI", sans-serif;
-      background: linear-gradient(135deg, #ffdee9, #b5fffc);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-    h1 {
-      text-align: center;
-      color: #333;
-      margin-top: 30px;
-      text-shadow: 1px 1px 2px white;
-    }
-    nav ul {
-      list-style: none;
-      padding: 0;
-      max-width: 400px;
-      margin: 40px auto;
-    }
-    nav li {
-      margin: 15px 0;
-    }
-    nav a {
-      display: block;
-      padding: 15px;
-      background-color: #ffffffcc;
-      color: #333;
-      text-decoration: none;
-      border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-      font-weight: bold;
-      text-align: center;
-      transition: 0.3s;
-    }
-    nav a:hover {
-      background-color: #f06292;
-      color: white;
-      transform: scale(1.05);
-    }
-    footer {
-      margin-top: auto;
-      text-align: center;
-      font-size: 14px;
-      color: #555;
-      padding: 15px;
-      background: #ffffffaa;
-      border-top: 1px solid #ddd;
-    }
-    footer a {
-      color: #333;
-      text-decoration: none;
-    }
-    footer a:hover {
-      color: #f06292;
-    }
-  </style>
-</head>
-<body>
-  <section class="w3-container">
-    <h1>🍡 Links to Shekinah Puguon's Work 🎀</h1>
-    <nav>
-      <ul>
-        <li><a href="./Public/2Q1GRubidiumPuguonShekinah.html">📘 First Graded Exercise</a></li>
-        <li><a href="./Public/Q21NGRubidiumPuguon.html">📘 First Non Graded Exercise</a></li>
-        <li><a href="./Public/2Q2GRubidiumPuguonShekinah.html">📘 Second Graded Exercise</a></li>
-        <li><a href= "./Public/Bonuses/Q2BonusTask1.html">Q2 Bonus 1</a></li>
-        <li><a href= "./Public/Bonuses/Q2BonusTask2.html">Q2 Bonus 2</a></li>
-        <li><a href= "./Public/Bonuses/Q2BonusTask3.html">Q2 Bonus 3</a></li>
-        <li><a href= "./Public/Bonuses/Q2BonusTask4.html">Q2 Bonus 4</a></li>
-        <li><a href= "./Public/Bonuses/Q2BonusTask5.html">Q2 Bonus 5</a></li>
-        <li><a href= "./Public/Q3_2GRubidiumPuguon.html">Q3 Graded</a></li>
-        <li><a href= "./Q3/index.html">Q3 Elective Sign-Up Form</a></li>
-        <li><a href= "./Q4/q41gRubidiumPUGUON.html">Q4 Graded</a></li>
-        <li><a href= "./9RubidiumPUGUONseatwork2.md">Q4 Seatwork MD</a></li>
-        <li><a href= "./9RubidiumPUGUONseatwork2.html">Q4 Seatwork HTML</a></li>
-        <li><a href= "./Q4/q43gRubidiumPUGUON/errorlogs.html">Q4 Seatwork HTML</a></li>
-        
-        
+	<head>
+		<title>Transition</title>
+		<meta charset="utf-8">
+		<meta name="description" content="Sample code to implement transition">
+	    <meta name="keywords" content="transition">
+	    <meta name="author" content="A.L. Mendoza">
+	    <meta name="revised" content="01/13/2020">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<style>
+			* {
+			    box-sizing: border-box;  
+			}
 
-      </ul>
-    </nav>
-  </section>
+			body {
+			    font-family: Arial, Helvetica, sans-serif;
+			}
 
-  <footer>
-    <p> References & Credits 🩰</p>
+			/*-- simple text and border effects on h1 -- */
+			h1 { background: lightgray; 
+				color: white;
+				text-align: center; 
+				padding: 10px;
+				width: 50%;
+				border-radius: 25px;
+				margin: 0 auto;
+				border: 2px solid gray;
+				text-shadow: 2px 2px 5px #000000;
+				box-shadow: 10px 10px 7px grey;
+			}
+				
+			div {width: 100px;
+				height: 100px;
+				padding-top: 10px;
+				margin: 20px auto;
+				text-align:center;
+				color: white;
+			}
+				
+			.first {background-color:red}
+			.second {background-color:blue}
+			.third {background-color:red}
+
+			/*-- transition on width and heigth --*/
+			.first {
+				transition: width 2s, height 4s;
+			}
+
+			.first:hover {
+				width: 200px;
+				height: 200px;
+			}
+
+			/*-- background color transition --*/
+			.second {
+			  -webkit-transition-duration: 2s;
+			  transition-duration: 2s;
+			  
+			  -webkit-transition-property: background-color;
+			  transition-property: background-color;
+			}
+
+			.second:hover { 
+				background-color: lightblue;
+				cursor: pointer
+			}
+
+			/*-- transform transition --*/
+			.third {
+				transition: transform 1s;
+			}
+
+			.third:hover { 
+				-webkit-transform: rotate(360deg); /* Safari */
+				transform: rotate(360deg)
+			}
+
+		      /*-- flex-grow transition --*/
+		      p { text-align: center;}
+		      #container {
+		        width: 70%;
+		        margin: 0 auto;
+		        text-align: center; 
+		        display: flex;
+		      }
+		      
+		      #container div {
+		        height: 5cm;
+		        background-color: lightcyan;
+		        color: black;
+		        border: 1px solid black;
+		        margin: 0px 0px 5px; 
+		        padding-top: 5px;
+		      }
+		      
+		      #container > div {
+		        flex-grow: 1;
+		        transition: flex-grow 1s;
+		        transition-timing-function: ease-int-out;
+		      }
+		      
+		      #container div:hover{
+		        background: cornsilk;
+		        flex-grow: 2;
+		      }
+		
+		      /*-- for the return to home button */
+		      a {
+		        text-decoration: none;
+		      }
+		      button {
+		        display: block;
+		        width: 25vw;
+		        padding: 5px;
+		        margin: 10px auto;
+		      }
+		</style>
+	</head>
+	<body>
+		<h1> transition property  </h1>
+		<div class="first"> width and height </div>
+		<div class="second"> background </br> color </div>
+		<div class="third"> transform<br/> &#11164;&#11166; </div>
     <p>
-      Styled with <a href="https://www.w3schools.com/w3css/" target="_blank">W3.CSS</a>  
-      · Gradient inspiration from <a href="https://cssgradient.io/" target="_blank">CSS Gradient</a>  
+      <a href="../index.html">
+        <button> Click me for Home</button> 
+      </a>
     </p>
-  </footer>
-</body>
+    <p> Transition on Flex Grow</p>
+    <div id="container">
+     <div>
+       <h2> 1 </h2>
+       <p> いち <br/>(ichi) </p>
+     </div>
+     <div>
+       <h2> 2 </h2>
+        <p> に <br/> (ni) </p>
+     </div>
+     <div>
+       <h2> 3 </h2>
+       <p> さん <br/> (san) </p>
+     </div>
+     <div>
+       <h2> 4 </h2>
+       <p> し <br/>(shi) </p>
+     </div>
+    </div>
+	</body>
 </html>
