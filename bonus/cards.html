@@ -1,0 +1,217 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Transition and Animation Exercises</title>
+		<meta charset="UTF-8">
+		<meta name="description" content="Sample Code to implement transform and transition">
+	    <meta name="author" content="A.L. Mendoza & M.Tarcelo">
+	    <meta name="revised" content="12/04/2022">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<style>
+			* {
+				box-sizing: border-box;
+			}
+			#deck{
+				width: 50vw;
+				height: 50vh;
+				margin: 0 auto 110px;
+				border: 3px solid black;
+				padding: 40px;
+			}
+			#deck div{
+				border: 3px solid black;
+				height: 30vh;
+				width: 20vw;
+				background-color: white;
+				color: red;
+				font-size: 2em;
+				padding: 5px;
+				font-weight: bold;
+                position: fixed;
+                top: 10vh;
+                left: 50vw;
+			}
+			#deck div:hover{
+                transform: translate(0px, -40px) rotate(10deg);
+			}
+			#deck:hover div:first-child{
+                transform: translateX(-10px, -50px) rotate(20deg);
+
+			}
+			#deck:hover div:nth-child(2){
+                transform: translateX(-20px, -60px) rotate(30deg);
+			}
+			#deck:hover div:nth-child(3){
+                transform: translateX(-30px, -70px) rotate(40deg);
+			}
+			#deck:hover div:nth-child(4){
+                transform: translateX(-40px, -80px) rotate(50deg);
+			}
+			#deck:hover div:nth-child(5){
+                transform: translateX(-50px, -90px) rotate(60deg);
+			}
+
+
+			#deck div:hover{
+				border: 3px solid yellow;
+			}
+			#deck div:first-child:hover{
+				background-color: yellow;
+			}
+			#deck div:nth-child(2):hover{
+				background-color: orange;
+			}
+			#deck div:nth-child(3):hover{
+				background-color: green;
+			}
+			#deck div:nth-child(4):hover{
+				background-color: blue;
+			}
+			#deck div:nth-child(5):hover{
+				background-color: violet;
+			}
+			a {
+				text-decoration: none;
+			}
+			button {
+				display: block;
+				width: 25vw;
+				padding: 5px;
+				margin: 10px auto;
+
+			    box-sizing: border-box;  
+			}
+
+			body {
+			    font-family: Arial, Helvetica, sans-serif;
+			}
+
+			/*-- simple text and border effects on h1 -- */
+			h1 { background: lightgray; 
+				color: white;
+				text-align: center; 
+				padding: 10px;
+				width: 50%;
+				border-radius: 25px;
+				margin: 0 auto;
+				border: 2px solid gray;
+				text-shadow: 2px 2px 5px #000000;
+				box-shadow: 10px 10px 7px grey;
+			}
+				
+			div {width: 100px;
+				height: 100px;
+				padding-top: 10px;
+				margin: 20px auto;
+				text-align:center;
+				color: white;
+			}
+				
+			.first {background-color:red;}
+			.second {background-color:blue}
+
+			/*-- animation happen on hover --*/
+
+			/*-- moving animation  --*/
+			.first {
+				position:relative;
+				-webkit-animation-duration: 4s; /* Safari 4.0 - 8.0 */
+				animation-name: div1;
+				animation-duration: 4s;
+				animation-iteration-count: infinite;
+				animation-direction: alternate;
+			}
+
+			
+			/* Standard syntax */
+			@keyframes div1 {
+			  0%   {background-color:red; left:0px; top:0px;}
+			  25%  {background-color:yellow; left:200px; top:0px;}
+			  50%  {background-color:blue; left:200px; top:300px;}
+			  75%  {background-color:green; left:0px; top:300px;}
+			  100% {background-color:red; left:0px; top:0px;}
+			}
+
+			/* Safari 4.0 - 8.0 */
+			@-webkit-keyframes div1 {
+			  0%   {background-color:red; left:0px; top:0px;}
+			  25%  {background-color:yellow; left:200px; top:0px;}
+			  50%  {background-color:blue; left:200px; top:300px;}
+			  75%  {background-color:green; left:0px; top:300px;}
+			  100% {background-color:red; left:0px; top:0px;}
+			}
+
+			.second {
+			  width: 100px;
+			  height: 100px;
+        /* the name div2 here will be used in the @keyframes*/
+			  animation-name: div2;				
+			  animation-duration: 5s;
+			  animation-iteration-count: infinite;
+			}
+
+			@keyframes div2 {
+			  from {background-color: yellow;}
+			  to {background-color: blue;}
+			 }
+		    a {
+		        text-decoration: none;
+			}
+			button {
+				display: block;
+				width: 25vw;
+				padding: 5px;
+				margin: 10px auto;
+			  }
+
+              {box-sizing: border-box}
+			div{
+				transition: all 0.5s;
+			}
+			
+			#roll{
+				width: 400px;
+				height: 400px;
+				margin: 30px auto;
+			}
+			#roll img{
+				width: 100%;
+        		height: 100%;
+        		opacity: 0.75;
+			}
+      		#roll img:hover{
+				opacity: 1;
+			}
+			#roll div{
+				width: 200px;
+				height: 200px;
+			}
+			#roll div:first-of-type{
+				background-color: red;
+			}
+			#roll div:nth-of-type(2){
+				background-color: yellow;
+				}
+			#roll div:nth-of-type(3){
+				background-color: blue;
+			}
+			#roll div:last-of-type{
+ 				background-color: green;
+			}
+			p {
+				text-align: center;
+            }
+		</style>
+	</head>
+	<body>
+		<div id="deck">
+			<div> &#9824;</div>
+			<div> &#127808;</div>
+			<div>	&#9670;</div>
+			<div>	&#10084;</div>
+      <div> &#127183;</div>
+		</div>
+    <a href="../index.html"><button> Click me for Home</button> </a>
+	</body>
+</html>
